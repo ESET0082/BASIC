@@ -1,0 +1,11 @@
+select *  from  users u1 
+		inner join 
+		orders u2 on u1.user_id=u2.user_id 
+		inner join 
+		books u3 on u3.product_id= u2.product_id;
+
+select *  from  users u1 
+		inner join orders u2 on u1.user_id=u2.user_id 
+			inner join books u3 on u3.product_id= u2.product_id 
+				where
+					price>=(select max(price) from books)
