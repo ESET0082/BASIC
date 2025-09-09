@@ -67,4 +67,4 @@ select * from SmartMeterReadings where energyconsumed between 10 and 560 and rea
 
  -- in below this query we try dinfing  CustomerId,avg(s.EnergyConsumed) as AvgEnergy,max(s.EnergyConsumed) as MaxEnergy of every Customers
 
-select c.Custome
+select c.CustomerId,avg(s.EnergyConsumed) as AvgEnergy,max(s.EnergyConsumed) as MaxEnergy from Customers c inner join SmartMeterReadings s on c.CustomerId=s.CustomerId group by c.CustomerId
