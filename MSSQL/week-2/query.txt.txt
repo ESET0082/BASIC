@@ -1,0 +1,70 @@
+
+USE bhammar  -- use database name bhammar
+
+
+CREATE TABLE Customers (					 -- create table name Customers that contain column name 
+    CustomerId INT PRIMARY KEY,                                  --  CustomerId (primary key), 
+    Name VARCHAR(255),						 --  column name-> name of the Customers 
+    Address VARCHAR(255),                                        --  address of Customers
+    Region VARCHAR(50)                                           --  Region of Customers
+);
+
+
+select * from Customers;
+
+CREATE TABLE SmartMeterReadings (    -- create table name SmartMeterReadings that contain column name 
+    MeterId INT PRIMARY KEY,         -- column name  MeterId , 
+    CustomerId INT,                  -- column name  CustomerId 
+    Location VARCHAR(100),            -- column name  Location  
+    InstalledDate DATE,                -- column name InstalledDate
+    ReadingDateTime DATETIME,           -- column name ReadingDateTime
+    EnergyConsumed DECIMAL(10, 2),       -- column name EnergyConsumed 
+    FOREIGN KEY (CustomerId) REFERENCES Customers(CustomerId)      -- define CustomerId FOREIGN KEY in table this table that refer CustomerId in customers  table
+);
+drop table SmartMeterReadings
+
+insert into customers (CustomerId,Name,Address,Region) values (1,'A','add1','North')
+insert into customers (CustomerId,Name,Address,Region) values (2,'B','add2','South')
+insert into customers (CustomerId,Name,Address,Region) values (3,'C','add3','East')
+insert into customers (CustomerId,Name,Address,Region) values (4,'D','add4','West')
+insert into customers (CustomerId,Name,Address,Region) values (5,'E','add5','North')
+
+
+
+
+insert into SmartMeterReadings (MeterId,CustomerId,Location,InstalledDate,ReadingDateTime,EnergyConsumed) 
+									 values 
+										(100,1,'add1','2020-01-01','2020-02-02',111.11),
+										(200,2,'add2','2021-01-01','2021-02-02',222.22),
+										(300,3,'add3','2022-01-01','2022-02-02',333.33),
+										(400,4,'add4','2023-01-01','2023-02-02',444.4),
+										(500,5,'add5','2024-01-01','2024-02-02',555.55),
+										(600,5,'add5','2024-01-01','2024-02-02',555.55),
+										(700,5,'add5','2024-01-01','2024-02-02',10000.55)
+
+
+
+
+
+
+
+
+
+
+
+select * from SmartMeterReadings 
+select * from Customers;
+
+
+ -- in below this query we try dinfing  all column name from SmartMeterReadings where energyconsumed between 10 and 50 and  readingdatetime>='2024-01-01' and readingdatetime<='2024-06-30'
+ 
+
+select * from SmartMeterReadings where energyconsumed between 10 and 560 and readingdatetime>='2024-01-01' and readingdatetime<='2024-06-30'
+
+
+								 
+								 
+
+ -- in below this query we try dinfing  CustomerId,avg(s.EnergyConsumed) as AvgEnergy,max(s.EnergyConsumed) as MaxEnergy of every Customers
+
+select c.Custome
