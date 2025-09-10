@@ -1,0 +1,67 @@
+
+use bhammar
+
+-- see hoe many table in this databasde
+
+SELECT TABLE_NAME
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_CATALOG = 'bhammar';
+
+ 
+
+ --   query-1:
+			
+select *  from  users u1 
+					  full outer join 
+						orders u2 on u1.user_id=u2.user_id 
+							full outer join 
+								books u3 on u3.product_id= u2.product_id 
+
+ --   query-2:
+			 select * from orders
+
+ --   query-3:
+			 select *  from  users u1 
+		inner join orders u2 on u1.user_id=u2.user_id 
+			inner join books u3 on u3.product_id= u2.product_id 
+				where
+					u3.title in ('black magic','HALF girlfriend')
+
+ --   query-4:
+			 select u1.user_id,u1.name,u3.title  from  users u1 
+		inner join orders u2 on u1.user_id=u2.user_id 
+			inner join books u3 on u3.product_id= u2.product_id  order by u1.user_id
+				
+ --   query-5:
+			 select u1.user_id,sum(u3.price)  from  users u1 
+		    inner join orders u2 on u1.user_id=u2.user_id 
+			inner join books u3 on u3.product_id= u2.product_id  group by u1.user_id
+
+ --   query-6:
+			select sum(u31.price)  from  users u11 
+		    inner join orders u21 on u11.user_id=u21.user_id 
+			inner join books u31 on u31.product_id= u21.product_id  group by u11.user_id order by sum(u31.price) desc OFFSET 0 ROWS      -- Skip the first 10 rows (first page)
+			FETCH NEXT 1 ROWS ONLY
+
+			--select u1.user_id,sum(u3.price)  from  users u1 
+		    --inner join orders u2 on u1.user_id=u2.user_id 
+			--inner join books u3 on u3.product_id= u2.product_id  group by u1.user_id order by sum(u3.price) desc OFFSET 0 ROWS      -- Skip the first 10 rows (first page)
+			--FETCH NEXT 1 ROWS ONLY;
+
+ --   query-7:
+			select * from books order by price desc
+
+ --   query-8:
+			select max(price) as max_price from books
+
+ --   query-9:
+			select min(price) as min_price from books
+
+
+ --   query-10:
+			select user_id,max(order_no) as curr_order from orders group by user_id order by user_id desc OFFSET 0 ROWS      -- Skip the first 10 rows (first page)
+			FETCH NEXT 1 ROWS ONLY
+
+
+
+
