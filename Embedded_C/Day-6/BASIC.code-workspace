@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"name": "my-project",
+			"path": "C:/Users/user/Documents/PlatformIO/Projects/my-project"
+		},
+		{
+			"name": "LCD",
+			"path": "."
+		}
+	],
+	"settings": {}
+}
