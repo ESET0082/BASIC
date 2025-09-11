@@ -1,6 +1,6 @@
 #include "hal_gpio.h"
 #include "..\config\pin_config.h"
-
+static int count=0
 void hal_gpio_init(){
     *led_ddr = 0xff;
     *button_ddr = 0x00;
