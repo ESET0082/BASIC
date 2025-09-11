@@ -1,0 +1,41 @@
+
+---- Assignment :1  Top -n books per user -(Find the top 2 most expensive books purchased by each user)
+
+SELECT *
+FROM (
+    SELECT 
+        u.user_id,
+        u.name,
+        b.Title,
+        b.Price,
+		u.email,
+		o.order_no,
+        ROW_NUMBER() OVER (PARTITION BY u.user_id ORDER BY b.Price DESC) AS popularity
+    FROM orders o
+    INNER JOIN users u ON o.user_id = u.user_id
+    INNER JOIN books b ON o.product_id = b.product_id
+) temp_table
+WHERE temp_table.popularity <= 2
+ORDER BY user_id, Price DESC;
+
+
+
+
+
+-- Assignment 2 Ranking users by total spending (Find how much each user spent in total and rank them)
+
+
+
+  SELECT 
+    u.user_id,
+    u.name,
+    SUM(b.Price) AS Total_price,
+    RANK() OVER (ORDER BY SUM(b.Price) DESC) AS Rank_Num,
+    DENSE_RANK() OVER (ORDER BY SUM(b.Price) DESC) AS Dense_Rank_Num
+FROM orders o
+INNER JOIN users u ON o.user_id = u.user_id
+INNER JOIN books b ON o.product_id= b.product_id
+GROUP BY u.user_id, u.name
+ORDER BY Total_price DESC;
+
+
