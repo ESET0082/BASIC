@@ -1,0 +1,94 @@
+
+use Academic
+
+-- query-1
+
+select id,name from Students2024 union 
+select id,name from Students2025
+
+
+-- query-2
+
+select id,name from Students2024 union all
+select id,name from Students2025
+
+-- query-3 ( Display employee names in UPPERCASE and LOWERCASE.)
+
+select upper(name) as upper_case,lower(name) as lower_case from Employees
+
+
+-- query-4 (  Find the length of each employee’s name.)
+
+select name,len(name) as Employee_name_length from Employees
+
+
+-- query-5 (how only the first 3 letters of each name.)
+
+select * from Employees
+select substring(name,0,4) from Employees
+
+
+
+-- query-6 (Replace Finance department with Accounts.)
+
+select * from Employees
+select REPLACE(Department,'Finance','Accounts') from Employees
+
+
+-- query-7 (Create a new column showing "Name - Department" using CONCAT.)
+
+select * from Employees
+select CONCAT(Name,' - ',Department) as Name_Department from Employees
+
+
+-- query-8 ( Show today’s date using GETDATE().)
+
+select getdate() as today_date
+
+-- query-9 ( Find the duration (in days) of each project using DATEDIFF.)
+
+select * from Projects
+select name as project_name,DATEDIFF(day,startdate,enddate) as number_of_day from Projects
+
+
+-- query-10 ( Add 10 days to each project’s EndDate using DATEADD.)
+
+select * from Projects
+select name as project_name,DATEADD(day,10,enddate) as new_enddate from Projects
+
+
+-- query-11 ( Find how many days are left until each project ends. )
+
+select * from Projects
+select name as project_name,DATEDIFF(day,getdate(),EndDate) as new_enddate from Projects
+
+
+--CAST, CONVERT, CASE
+
+
+-- query-12 ( Convert today’s date into DD/MM/YYYY format using CONVERT.)
+
+select CONVERT(varchar(10),Getdate(),103) as date_ddmmyyyy
+
+
+-- query-13 ( . Convert a float 123.456 into an integer using CAST.)
+
+select cast(123.456 as int ) as change_into_int
+
+-- query-14 
+ 
+--3. For employees (from Employees table above), categorize them:
+--* 	If Dept = IT → show Tech Team
+--* 	If Dept = HR → show Human Resources
+--* 	Else → Other)
+
+SELECT
+    Name,
+    Department,
+    CASE
+        WHEN Department = 'IT' THEN 'Tech Team'
+        WHEN Department = 'HR' THEN 'Human Resources'
+        ELSE 'Other'
+    END AS Dept_categoty
+FROM Employees;
+
