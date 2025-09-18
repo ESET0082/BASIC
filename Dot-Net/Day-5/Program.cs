@@ -1,6 +1,7 @@
 ﻿namespace ConsoleApp3
 {
-    using Student = (int id, string name, int marks);
+    Tuple<int id, string name, int marks> Student = new Tuple<int id, string name, int marks>();
+    Dictionary<string, Student> ages = new Dictionary<string, Student>();
 
     internal class Program
     {
